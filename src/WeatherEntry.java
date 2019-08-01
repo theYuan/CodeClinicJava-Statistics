@@ -14,7 +14,7 @@ public class WeatherEntry {
 
         return("Date for: " + format.format(when)
         + "Barometric Pressure: "
-        + Float.toString(pressure)
-        + "Humidity: " + Float.toString(humidity));
+        + pressure
+        + "Humidity: " + humidity);
     }
 }
