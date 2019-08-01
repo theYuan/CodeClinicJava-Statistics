@@ -11,7 +11,7 @@ public class BPTrend {
     // use this data structure to store our data entries
     ArrayList<WeatherEntry> collectedData = new ArrayList<WeatherEntry>();
 
-    //collect information from tab tab spaced files and loads into array
+    //collect information from tab spaced files and loads into array
     public void readData(String fileName){
         DateFormat format = new SimpleDateFormat("yyyy_MM_dd HH:mm:ss");
         try {
@@ -21,7 +21,9 @@ public class BPTrend {
             boolean skipFirstLine = true;
 
             while(true){
+                // read lines into line
                 line = buf.readLine();
+
                 if (skipFirstLine){
                     skipFirstLine = false;
                     continue;
@@ -29,17 +31,21 @@ public class BPTrend {
 
                 if(line == null){
                     break;
+
                 }else{
                     wordsArray = line.split("\t");
                     // desired fields from input and WeatherEntry instance
+
                     WeatherEntry entry = new WeatherEntry();
+                    entry.when = format.parse(wordsArray[0]);
                     entry.pressure = Float.valueOf(wordsArray[2]);
                     entry.humidity = Float.valueOf(wordsArray[4]);
-                    entry.when = format.parse(wordsArray[0]);
                     collectedData.add(entry);
                 }
             }
+
             buf.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,7 +65,7 @@ public class BPTrend {
         String result = "From" + format.format(d1) + "to" + format.format(d2) + "\n";
 
         WeatherEntry y1 = null;
-        WeatherEntry y2 =null;
+        WeatherEntry y2 = null;
         int idx = 0;
         int x1=0;
         int x2=0;
